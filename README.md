@@ -5,8 +5,8 @@
 
 # NSIDC 0802v3
 
-{title} enables {audience} to {utility}.
-
+Convert JAXA AMSR2 L1R swath brightness temperature data to NSIDC polar stereo grids
+for use in sea ice concentration calculations
 
 ## Level of Support
 

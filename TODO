@@ -1,17 +1,36 @@
 
 - Create glossary of ScottShorthands
 
-- Use intermediate and output directories that are on /share/apps
-  - these should probably be dev-dependent so they are user-independent
+- Add code to apply sfm/lr methodology to gridded TB fields
+
+- Create config file for directory locations?
+  - should allow user to choose dev or prod versions of locations?
+
+✓ Use intermediate and output directories that are on /share/apps
+  Durrent dir structure:
+    datadir: /share/apps/nsidc0802/nsidc0802/dev/scotts/
+
+    TB fields drop-in-the-bucket gridded from L1R data:  [*** these are included in nsidc0802 netCDF file ***]
+        {datadir}/tb_gw1am2_grd/{gridid}/{year}/{month}/tb_gw1am2_{gridid}_{chanres}_{ymd}.dat
+      eg
+        /share/apps/nsidc0802/nsidc0802/dev/scotts/tb_gw1am2_grd/psn25/2024/03/tb_gw1am2_psn25_h19r06_20240315.dat
+
+    TB fields spatial-frequency-matched:
+        {datadir}/tb_gw1am2_sfm/{gridid}/{year}/{month}/tb_gw1am2_{gridid}_{chanres}_{ymd}.dat
+      eg
+        /share/apps/nsidc0802/nsidc0802/dev/scotts/tb_gw1am2_sfm/psn25/2024/03/tb_gw1am2_psn25_h19r06_20240315.dat
+
+    TB fields spatial-frequency-matched and with linear regression applied:  [*** these are included in nsidc0802 netCDF file ***]
+      ie "calibrated"
+        {datadir}/tb_gw1am2_cal/{gridid}/{year}/{month}/tb_gw1am2_{gridid}_{chanres}_{ymd}.dat
+      eg
+        /share/apps/nsidc0802/nsidc0802/dev/scotts/tb_gw1am2_cal/psn25/2024/03/tb_gw1am2_psn25_h19r06_20240315.dat
+
+  - Note: these should probably be dev-dependent so they are user-independent
   - Note: Directly-gridded files will not change unless the gridding
      methodology changes
      - But, sfmlr (spatial frequency matched, linearly regressed) files
        *will* change until the sfm/lr coefficients are finalized
 
-- Create config file for directory locations?
-  - should allow user to choose dev or prod versions of locations?
+✓ Remove code that generates unnecessary gridded TB fields
 
-- Remove code that generates unnecessary gridded TB fields
-
-- Add code to apply sfm/lr methodology to gridded TB fields
-  

@@ -1,6 +1,10 @@
 """Generate a polar stereo grid from JAXA AMSR2 L1R swath files
 
-Note: This builds on grid_jaxa_l1r.py and combine_gridded_l1r_tbs.py
+Usage examples:
+    python gen_ps_grid.py psn25 20240315
+    python gen_ps_grid.py pss25 20240315
+
+
 """
 
 import datetime as dt
@@ -157,6 +161,54 @@ def grid_from_l1r(gridid, src, date, intermed_dir='./intermed', output_dir='./ou
     print('after combine_tb_files()')
 
 
+def get_dirname_for_fieldtype(
+    gridid,
+    date,
+    field_type, 
+    data_dir='/share/apps/nsidc0802/nsidc0802/dev/scotts',
+    make_dir=True,
+):
+    """Determine the intermediate data directory for these params
+    This allows for a common subdirectory structure for data directories of similar
+    type
+    """
+    field_to_abbr = {
+        'raw_gridded': 'grd',
+        'gridded': 'grd',
+        'grd': 'grd',
+        'spatial_frequency_matched': 'sfm',
+        'sfm': 'sfm',
+        'calibrated': 'cal',
+        'cal': 'cal',
+        'sfmlr': 'cal',
+    }
+    try:
+        abbr = field_to_abbr[field_type]
+    except KeyError:
+        abbr = field_type
+
+    year = date.strftime('%Y')
+    month = date.strftime('%m')
+
+    this_dir = f'{data_dir}/{abbr}/{gridid}/{year}/{month}'
+
+    if make_dir:
+        os.makedirs(this_dir, exist_ok=True)
+
+    return this_dir
+
+
+def get_intermed_dir(data_dir, gridid, date, make_dir=True):
+    """Determine the intermediate data directory for these params"""
+    year = date.strftime('%Y')
+    month = date.strftime('%m')
+    intermed_dir = f'{data_dir}/{gridid}/{year}/{month}'
+    if make_dir:
+        os.makedirs(intermed_dir, exist_ok=True)
+
+    return intermed_dir
+
+
 if __name__ == '__main__':
     import sys
 
@@ -167,7 +219,9 @@ if __name__ == '__main__':
     except IndexError:
         src = 'jxam2l1r'
 
-    intermed_dir = '/share/apps/nsidc0802/nsidc0802/dev/scotts/intermed'
-    output_dir = '/share/apps/nsidc0802/nsidc0802/dev/scotts/output'
+    data_dir = '/share/apps/nsidc0802/nsidc0802/dev/scotts/'
+
+    intermed_dir = get_dirname_for_fieldtype(gridid, date, field_type='intermed', make_dir=True)
+    output_dir = get_dirname_for_fieldtype(gridid, date, field_type='grd', make_dir=True)
 
     grid_from_l1r(gridid, src, date, intermed_dir=intermed_dir, output_dir=output_dir)

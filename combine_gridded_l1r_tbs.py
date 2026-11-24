@@ -683,8 +683,13 @@ def combine_tb_files(
         is_valid_tb = tb_num > 0
         tb_field = np.zeros((ydim, xdim), dtype=np.float32)
 
+        combined_average = np.zeros(tb_sum.shape, dtype=np.float32)
         combined_average = np.divide(
-            tb_sum, tb_num, where=is_valid_tb, dtype=np.float32
+            tb_sum,
+            tb_num,
+            out=combined_average,
+            where=is_valid_tb,
+            dtype=np.float32,
         )
 
         tb_field = np.zeros((ydim, xdim), dtype=np.float32)

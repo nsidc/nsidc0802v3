@@ -102,9 +102,10 @@ def get_sample_outfile(fn, dn, match_substring):
     return out_fn
 
 
-def grid_from_l1r(gridid, src, date):
+def grid_from_l1r(gridid, src, date, intermed_dir='./intermed', output_dir='./output', overwrite=False):
     """Create grid from all swaths for this date"""
 
+    # TODO: A lot of these print statements can be removed or changed to logging.
     print(f'{gridid=}')
     print(f'{date=}')
     print(f'{src=}')
@@ -115,17 +116,10 @@ def grid_from_l1r(gridid, src, date):
     swfile_list = get_swathfile_list(src, date)
     print(f'  swfile_list: {len(swfile_list)} files')
 
-    #config_fn = './amsr2l1r_psn25_config.yaml'
-    #config_fn = f'./amsr2l1r_{gridid}_config.yaml'
-    config_fn = f'./amsr2l1r_{gridid}_extra_config.yaml'
-    print(f'using special config file:\n  {config_fn}')
+    config_fn = f'./amsr2l1r_{gridid}_config.yaml'
     config = read_jxam2l1r_config(config_fn)
     print(f'  config: {len(config)} items')
 
-    intermed_dir = './intermed'
-    output_dir = './output'
-
-    overwrite = False
     all_av_files = []
     all_ct_files = []
     for fn in swfile_list:
@@ -173,4 +167,7 @@ if __name__ == '__main__':
     except IndexError:
         src = 'jxam2l1r'
 
-    grid_from_l1r(gridid, src, date)
+    intermed_dir = '/share/apps/nsidc0802/nsidc0802/dev/scotts/intermed'
+    output_dir = '/share/apps/nsidc0802/nsidc0802/dev/scotts/output'
+
+    grid_from_l1r(gridid, src, date, intermed_dir=intermed_dir, output_dir=output_dir)

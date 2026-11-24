@@ -35,7 +35,7 @@ grid_vars:
   - lat_lowres
   - lon_lowres
 swath_vars:
-  # Commented-out lines are left here to illustrate how to provide those fields
+  # formerly nc_vars
   h18r06: Brightness Temperature (res06,18.7GHz,H)
   v18r06: Brightness Temperature (res06,18.7GHz,V)
   v23r06: Brightness Temperature (res06,23.8GHz,V)
@@ -47,9 +47,9 @@ swath_vars:
   #h18r23: Brightness Temperature (res23,18.7GHz,H)
   #v23r23: Brightness Temperature (res23,23.8GHz,V)
   #h36r23: Brightness Temperature (res23,36.5GHz,H)
-  #h18r36: Brightness Temperature (res36,18.7GHz,H)  # No res36 for 19GHz
-  #v23r36: Brightness Temperature (res36,23.8GHz,V)  # No res36 for 22GHz
-  #h36r36: Brightness Temperature (res36,36.5GHz,H)
+  # h18r36: Brightness Temperature (res36,18.7GHz,H)  # No res36 for 19GHz
+  # v23r36: Brightness Temperature (res36,23.8GHz,V)  # No res36 for 22GHz
+  h36r36: Brightness Temperature (res36,36.5GHz,H)
   landflag: Land_Ocean Flag 6 to 36
   scantime: Scan Time
   #pixeldataquality_lowres: Pixel Data Quality 6 to 36

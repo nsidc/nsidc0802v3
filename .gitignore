@@ -22,6 +22,8 @@ out
 # Common output directories
 out*/
 bak*/
+intermed
+output
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

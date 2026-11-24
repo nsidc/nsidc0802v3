@@ -59,7 +59,8 @@ NSIDC_GRIDNAME = {
 }
 
 
-def get_ncfn_0001(gridid, date, ver='v6.0', bdir='/home/scotts/Desktop/data/'):
+#def get_ncfn_0001(gridid, date, ver='v6.0', bdir='/home/scotts/Desktop/data/'):
+def get_ncfn_0001(gridid, date, ver='v6.0', bdir='/share/apps/nsidc0802/nsidc0802/dev/scotts'):
     """Return the name of the nsidc0001 netCDF file name"""
     year = date.strftime('%Y')
     ymd = date.strftime('%Y%m%d')
@@ -77,7 +78,8 @@ def get_ncfn_0001(gridid, date, ver='v6.0', bdir='/home/scotts/Desktop/data/'):
     return ncfn
 
 
-def get_bin_fn(coeftype, gridid, date, chanres, bdir='/home/scotts/Desktop/data/'):
+#def get_bin_fn(coeftype, gridid, date, chanres, bdir='/home/scotts/Desktop/data/'):
+def get_bin_fn(coeftype, gridid, date, chanres, bdir='/share/apps/nsidc0802/nsidc0802/dev/scotts'):
     """Return the appropriate binary file name"""
     bin_fn_ = '{bdir}/tb_gw1am2_{coeftype}/{gridid}/{year}/{month}/tb_gw1am2_{coeftype}_{gridid}_{chanres}_{ymd}.dat'
     bin_fn = bin_fn_.format(
@@ -506,7 +508,13 @@ def initial_file_name(fn_info):
 def output_file_name(fn_info):
     """Get the linreg version of this file name"""
     chanres = get_chanres(fn_info['chan'])
-    coeftype = fn_info['coeftype'] + 'lr'
+    if fn_info['coeftype'] == 'sfm':
+        coeftype = 'cal'
+    elif fn_info['coeftype'] == 'grd':
+        coeftype = 'glr'
+    else:
+        raise RuntimeError(f'cant compute output coeftype from: {fn_info["coeftype"]=}')
+    #coeftype = fn_info['coeftype'] + 'lr'
 
     ofn = get_bin_fn(
         coeftype=coeftype,

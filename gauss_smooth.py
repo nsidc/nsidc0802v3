@@ -132,9 +132,7 @@ def compute_gaussian_kernel(size, sigma):
         kernel_sum = np.sum(gauss_kernel)
         theoretical_sum = sigma * root_two_pi
         kernel_sum_mismatch = 1 - kernel_sum / theoretical_sum
-        # print(f'kernel_sum_mismatch: {kernel_sum_mismatch * 100:.3f}%')
-        # gauss_kernel = np.divide(gauss_kernel, sigma * root_two_pi)
-        gauss_kernel = np.divide(gauss_kernel, np.sum(gauss_kernel))
+        np.divide(gauss_kernel, np.sum(gauss_kernel), out=gauss_kernel)
 
     return gauss_kernel
 

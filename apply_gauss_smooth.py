@@ -148,8 +148,6 @@ def apply_gaussian_smoothing(config, ifn, ofn, tb_src='tb_gw1am2'):
     #  ofn = f'{outdir}/{obfn}'
     assert ifn != ofn
 
-    print('check ifn ofn size sigma')
-    breakpoint()
     create_sfm_field(ifn, ofn, size, sigma)
 
 
@@ -158,10 +156,6 @@ def get_corresponding_filename(ifn, fieldtype_in, fieldtype_out, make_dir=True):
     in_str = f'_{fieldtype_in}'
     out_str = f'_{fieldtype_out}'
     ofn = ifn.replace(in_str, out_str)
-    print('check ifn, ofn:')
-    print(f'  {ifn=}')
-    print(f'  {ofn=}')
-    breakpoint()
     try:
         assert ifn != ofn
     except AssertionError as err:

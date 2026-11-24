@@ -493,11 +493,14 @@ def grid_swath_data_ditb(vals, lons, lats, gridid, radius=20e3, nanval=0, label=
         np.isfinite(xvals) & np.isfinite(yvals) & (lats >= latmin) & (lats <= latmax)
     )
 
-    ivals_float = np.divide((xvals - x0), res, where=is_valid)
-    jvals_float = np.divide((y0 - yvals), res, where=is_valid)
+    ivals_float = np.zeros(is_valid.shape, dtype=np.float32)
+    jvals_float = np.zeros(is_valid.shape, dtype=np.float32)
 
-    ivals = np.floor(ivals_float, where=is_valid)
-    jvals = np.floor(jvals_float, where=is_valid)
+    np.divide((xvals - x0), res, out=ivals_float, where=is_valid)
+    np.divide((y0 - yvals), res, out=jvals_float, where=is_valid)
+
+    np.floor(ivals_float, out=ivals, where=is_valid)
+    np.floor(jvals_float, out=jvals, where=is_valid)
 
     is_ongrid = (
         is_valid
@@ -683,7 +686,7 @@ def combine_tb_files(
         tb_field = np.zeros((ydim, xdim), dtype=np.float32)
 
         combined_average = np.zeros(tb_sum.shape, dtype=np.float32)
-        combined_average = np.divide(
+        np.divide(
             tb_sum,
             tb_num,
             out=combined_average,

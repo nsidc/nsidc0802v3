@@ -1,9 +1,9 @@
-tb_fn_prefix: tb_gw1am2
+tb_fn_prefix: tb_gw1am2_grd
 gridid: pss25
 #overwrite: False
 overwrite: True
 var_fn_template: "{dirname}/{gridid}_{varname}_{calc}_{tstamp}.dat"
-tb_fn_template: "{outputdir}/{prefix}_{gridid}_{tb}_{date}.dat"
+tb_fn_template: "{outputdir}/{tb_fn_prefix}_{gridid}_{tb}_{date}.dat"
 #sic_fnstem_template: "{output_dir}/siconc_{prefix}_{gridid}"
 ancillary_dir: "./nise_a2_ancillary"
 output_dir: "./output"

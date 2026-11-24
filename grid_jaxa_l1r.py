@@ -588,8 +588,13 @@ def grid_swath_data_ditb(vals, lons, lats, gridid, radius=20e3, nanval=0, label=
         np.isfinite(xvals) & np.isfinite(yvals) & (lats >= latmin) & (lats <= latmax)
     )
 
-    ivals_float = np.divide((xvals - x0), res, where=is_valid)
-    jvals_float = np.divide((y0 - yvals), res, where=is_valid)
+    # Initialize these values to zero because we are only going to assign
+    #   values to the is_valid indices
+    ivals_float = np.zeros(is_valid.shape, dtype=np.float32)
+    jvals_float = np.zeros(is_valid.shape, dtype=np.float32)
+
+    np.divide((xvals - x0), res, out=ivals_float, where=is_valid)
+    np.divide((y0 - yvals), res, out=jvals_float, where=is_valid)
 
     try:
         ivals = np.floor(ivals_float, where=is_valid).astype(int)
@@ -627,13 +632,14 @@ def grid_swath_data_ditb(vals, lons, lats, gridid, radius=20e3, nanval=0, label=
 
     has_value = grid_num > 0
 
-    grid_avg = np.divide(grid_sum, grid_num, where=has_value)
+    grid_avg = np.zeros(has_value.shape, dtype=np.float32)
+    np.divide(grid_sum, grid_num, out=grid_avg, where=has_value)
 
     grid_avg[~has_value] = np.nan
     grid_cnt = grid_num.copy()
     grid_cnt[~has_value] = 0
 
-    return grid_avg.astype(np.float32), grid_cnt.astype(np.int16)
+    return grid_avg, grid_cnt.astype(np.int16)
 
 
 def get_runtime_info(fn, config, intermed_dir=None, output_dir=None, overwrite=None):

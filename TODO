@@ -6,6 +6,8 @@
 - Create config file for directory locations?
   - should allow user to choose dev or prod versions of locations?
 
+- Determine a means of cleaning up intermediate files once no longer needed
+
 ✓ Use intermediate and output directories that are on /share/apps
   Durrent dir structure:
     datadir: /share/apps/nsidc0802/nsidc0802/dev/scotts/

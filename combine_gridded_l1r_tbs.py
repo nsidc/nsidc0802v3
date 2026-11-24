@@ -540,7 +540,7 @@ def get_runtime_info(indir, config, intermed_dir=None, output_dir=None, overwrit
 
     runtime_info['indir'] = indir
 
-    # tb_fn_prefix: tb_gw1am2
+    # tb_fn_prefix: tb_gw1am2_grd
     runtime_info['tb_fn_prefix'] = config['tb_fn_prefix']
 
     # tb_fn_template: "{outputdir}/{prefix}_{gridid}_{tb}_{date}.dat"
@@ -651,7 +651,6 @@ def combine_tb_files(
             ct_files = [f for f in all_ct_files if f'{indir}/{runtime_info["gridid"]}_{tb}_ct_' in f]
 
         print(f'Working on {len(av_files)} av and {len(ct_files)} ct files')
-        # breakpoint()
         tb_sum = np.zeros((ydim, xdim), dtype=np.float32)
         tb_num = np.zeros((ydim, xdim), dtype=np.int16)
 
@@ -697,7 +696,7 @@ def combine_tb_files(
 
         output_fn = runtime_info['tb_fn_template'].format(
             outputdir=runtime_info['output_dir'],
-            prefix=runtime_info['tb_fn_prefix'],
+            tb_fn_prefix=runtime_info['tb_fn_prefix'],
             gridid=runtime_info['gridid'],
             tb=tb,
             date=date.strftime('%Y%m%d'),

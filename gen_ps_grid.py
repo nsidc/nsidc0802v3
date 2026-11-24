@@ -165,6 +165,7 @@ def get_dirname_for_fieldtype(
     gridid,
     date,
     field_type, 
+    data_source='tb_gw1am2',
     data_dir='/share/apps/nsidc0802/nsidc0802/dev/scotts',
     make_dir=True,
 ):
@@ -190,7 +191,8 @@ def get_dirname_for_fieldtype(
     year = date.strftime('%Y')
     month = date.strftime('%m')
 
-    this_dir = f'{data_dir}/{abbr}/{gridid}/{year}/{month}'
+    subdir_name = f'{data_source}_{abbr}'
+    this_dir = f'{data_dir}/{subdir_name}/{gridid}/{year}/{month}'
 
     if make_dir:
         os.makedirs(this_dir, exist_ok=True)
@@ -198,15 +200,15 @@ def get_dirname_for_fieldtype(
     return this_dir
 
 
-def get_intermed_dir(data_dir, gridid, date, make_dir=True):
-    """Determine the intermediate data directory for these params"""
-    year = date.strftime('%Y')
-    month = date.strftime('%m')
-    intermed_dir = f'{data_dir}/{gridid}/{year}/{month}'
-    if make_dir:
-        os.makedirs(intermed_dir, exist_ok=True)
-
-    return intermed_dir
+# def get_intermed_dir(data_dir, gridid, date, make_dir=True):
+#     """Determine the intermediate data directory for these params"""
+#     year = date.strftime('%Y')
+#     month = date.strftime('%m')
+#     intermed_dir = f'{data_dir}/{gridid}/{year}/{month}'
+#     if make_dir:
+#         os.makedirs(intermed_dir, exist_ok=True)
+# 
+#     return intermed_dir
 
 
 if __name__ == '__main__':

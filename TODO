@@ -1,0 +1,17 @@
+
+- Create glossary of ScottShorthands
+
+- Use intermediate and output directories that are on /share/apps
+  - these should probably be dev-dependent so they are user-independent
+  - Note: Directly-gridded files will not change unless the gridding
+     methodology changes
+     - But, sfmlr (spatial frequency matched, linearly regressed) files
+       *will* change until the sfm/lr coefficients are finalized
+
+- Create config file for directory locations?
+  - should allow user to choose dev or prod versions of locations?
+
+- Remove code that generates unnecessary gridded TB fields
+
+- Add code to apply sfm/lr methodology to gridded TB fields
+  

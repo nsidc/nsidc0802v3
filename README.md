@@ -32,7 +32,12 @@ nsidc@nsidc.org for more information.
 
 ## Usage
 
-{usage}
+Note: These instructions are under active revision and subject to change without notice
+
+To create the northern hemisphere gridded l1r fields for March 15, 2024:
+
+`python gen_ps_grid.py psn25 20240315`
+
 
 
 ## Troubleshooting

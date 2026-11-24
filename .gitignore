@@ -17,6 +17,7 @@
 *.out
 *.gz
 *.zip
+out
 
 # Common output directories
 out*/

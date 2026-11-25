@@ -3,15 +3,17 @@ channels:
   - conda-forge
   - nodefaults
 dependencies:
-  - python~=3.13
+  - python=3.13
   - earthaccess
   # Core numerics
   - numpy
   - scipy
   - pandas
+  - dask
   # NetCDF / array I/O
   - netcdf4
   - xarray
+  - zarr
   # Geospatial / resampling
   - pyproj
   - pyresample

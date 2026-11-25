@@ -1,0 +1,77 @@
+tb_fn_prefix: tb_gw1am2_grd
+gridid: psn25
+#overwrite: False
+overwrite: True
+var_fn_template: "{dirname}/{gridid}_{varname}_{calc}_{tstamp}.dat"
+tb_fn_template: "{outputdir}/{tb_fn_prefix}_{gridid}_{tb}_{date}.dat"
+#sic_fnstem_template: "{output_dir}/siconc_{prefix}_{gridid}"
+ancillary_dir: "./nise_a2_ancillary"
+output_dir: "./output"
+intermed_dir: "./intermed"
+latlon_vars:
+  lat_lowres:
+  lon_lowres:
+lat: lat_lowres
+lon: lon_lowres
+grid_vars:
+  h19r06:
+  - h18r06
+  - lat_lowres
+  - lon_lowres
+  v19r06:
+  - v18r06
+  - lat_lowres
+  - lon_lowres
+  v22r06:
+  - v23r06
+  - lat_lowres
+  - lon_lowres
+  h37r06:
+  - h36r06
+  - lat_lowres
+  - lon_lowres
+  v37r06:
+  - v36r06
+  - lat_lowres
+  - lon_lowres
+swath_vars:
+  # formerly nc_vars
+  h18r06: Brightness Temperature (res06,18.7GHz,H)
+  v18r06: Brightness Temperature (res06,18.7GHz,V)
+  v23r06: Brightness Temperature (res06,23.8GHz,V)
+  h36r06: Brightness Temperature (res06,36.5GHz,H)
+  v36r06: Brightness Temperature (res06,36.5GHz,V)
+  #h18r10: Brightness Temperature (res10,18.7GHz,H)
+  #v23r10: Brightness Temperature (res10,23.8GHz,V)
+  #h36r10: Brightness Temperature (res10,36.5GHz,H)
+  #h18r23: Brightness Temperature (res23,18.7GHz,H)
+  #v23r23: Brightness Temperature (res23,23.8GHz,V)
+  #h36r23: Brightness Temperature (res23,36.5GHz,H)
+  # h18r36: Brightness Temperature (res36,18.7GHz,H)  # No res36 for 19GHz
+  # v23r36: Brightness Temperature (res36,23.8GHz,V)  # No res36 for 22GHz
+  h36r36: Brightness Temperature (res36,36.5GHz,H)
+  landflag: Land_Ocean Flag 6 to 36
+  scantime: Scan Time
+  #pixeldataquality_lowres: Pixel Data Quality 6 to 36
+  # Note: low-resolution lat/lon is every even index (0-based) of high-res lat/lon
+  lat_highres: Latitude of Observation Point for 89A
+  lon_highres: Longitude of Observation Point for 89A
+subsetted_vars:
+  # Subsetted by istart, iskip, jstart, jskip
+  lat_lowres:
+    - lat_highres
+    - 0
+    - 2
+    - 0
+    - 1
+  lon_lowres:
+    - lon_highres
+    - 0
+    - 2
+    - 0
+    - 1
+time_var:
+  time_utc:
+    - 1d
+    - scantime
+    - tai93_time
